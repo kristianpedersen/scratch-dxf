@@ -654,7 +654,7 @@ class Scratch3PenBlocks {
         this._setOrChangeColorParam(args.COLOR_PARAM, Cast.toNumber(args.VALUE), penState, false);
         coordinates.push(Object.assign({}, penState))
     }
-
+    
     /**
      * The pen "change pen size by {number}" block changes the pen size by the given amount.
      * @param {object} args - the block arguments.
@@ -662,11 +662,12 @@ class Scratch3PenBlocks {
      * @param {object} util - utility object provided by the runtime.
      */
     changePenSizeBy (args, util) {
+        const penState = this._getPenState(util.target);
         const penAttributes = this._getPenState(util.target).penAttributes;
         penAttributes.diameter = this._clampPenSize(penAttributes.diameter + Cast.toNumber(args.SIZE));
         coordinates.push(Object.assign({}, penAttributes))
     }
-
+    
     /**
      * The pen "set pen size to {number}" block sets the pen size to the given amount.
      * @param {object} args - the block arguments.
@@ -674,6 +675,7 @@ class Scratch3PenBlocks {
      * @param {object} util - utility object provided by the runtime.
      */
     setPenSizeTo (args, util) {
+        const penState = this._getPenState(util.target);
         const penAttributes = this._getPenState(util.target).penAttributes;
         penAttributes.diameter = this._clampPenSize(Cast.toNumber(args.SIZE));
         coordinates.push(Object.assign({}, penState))
